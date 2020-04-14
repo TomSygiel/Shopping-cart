@@ -6,7 +6,7 @@ class Footer extends React.Component {
     return(
       <div className="footer">
         <p>
-          <a href="#">Terms of Service </a>|  
+          <a href="#"> Terms of Service </a>|  
           <a href="#"> Privacy Policy </a>|  
           <a href="#"> Careers </a>|  
           <a href="#"> About </a>
