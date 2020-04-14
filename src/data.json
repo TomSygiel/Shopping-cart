@@ -1,0 +1,46 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "T-shirt in premium cotton",
+      "description": "A lot of self-importance goes on in the fashion industry. I'm not like that.",
+      "image": "./images/tee.jfif",
+      "price": 14.99
+    },
+    {
+      "id": 2,
+      "name": "Shirt in linnen mix",
+      "description": "Some people think luxury is the opposite of poverty. It is not. It is the opposite of vulgarity.",
+      "image": "./images/shirt.jfif",
+      "price": 29.99
+    },
+    {
+      "id": 3,
+      "name": "Sweater in merino wool",
+      "description": "I think in the darkest moments, we need a break. Clothes mean nothing until someone lives in them.",
+      "image": "./images/sweater.jfif",
+      "price": 39.99
+    },
+    {
+      "id": 4,
+      "name": "Biker jacket in leather",
+      "description": "Awkwardness gives me great comfort. I've never been cool, but I've felt cool.",
+      "image": "./images/jacket.jfif",
+      "price": 299
+    },
+    {
+      "id": 5,
+      "name": "Wool suit trousers",
+      "description": "I have a fantastic relationship with money. I use it to buy my freedom.",
+      "image": "./images/trousers.jfif",
+      "price": 69.99
+    },
+    {
+      "id": 6,
+      "name": "Slim jeans in tech stretch",
+      "description": "I always loved aesthetics. Not particularly fashion, but an idea of beauty.",
+      "image": "./images/jeans.jfif",
+      "price": 49.99
+    }
+  ]
+}
