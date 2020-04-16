@@ -6,10 +6,21 @@ class Footer extends React.Component {
     return(
       <div className="footer">
         <p>
-          <a href="#"> Terms of Service </a>|  
-          <a href="#"> Privacy Policy </a>|  
-          <a href="#"> Careers </a>|  
-          <a href="#"> About </a>
+          <div className="footer-link">
+            <a href="#">Terms of Service</a>
+          </div>
+          <span className="divider">|</span> 
+          <div className="footer-link">
+            <a href="#">Privacy Policy</a>
+          </div>
+          <span className="divider">|</span> 
+          <div className="footer-link"> 
+            <a href="#">Careers</a>
+          </div>
+          <span className="divider">|</span>  
+          <div className="footer-link">
+          <a href="#">About</a>
+          </div>
         </p>
       </div>
     )

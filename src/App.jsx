@@ -2,6 +2,7 @@ import React from 'react'
 import Nav from './components/Nav'
 import Home from './components/Home'
 import Cart from './components/Cart'
+import About from './components/About'
 import './App.css'
 import Footer from './components/Footer'
 import { Provider } from 'react-redux'
@@ -26,6 +27,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/cart" component={Cart} />
+              <Route path="/about" component={About} />
             </Switch>
           </BrowserRouter>
           <Footer />

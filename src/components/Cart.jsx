@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { productQuantity } from '../actions/productQuantity'
+import { productDelete } from '../actions/productDelete'
 
 import tee from '../images/tee.jfif'
 import shirt from '../images/shirt.jfif'
@@ -14,7 +15,7 @@ class Cart extends React.Component {
 
   render() {
 
-    const { basketProps, productQuantity } = this.props
+    const { basketProps, productQuantity, productDelete } = this.props
 
     let productsInCart = []
 
@@ -56,7 +57,7 @@ class Cart extends React.Component {
           </div>
 
           <div className="delete">
-            <ion-icon name="trash-outline" /*onClick={}*/></ion-icon>
+            <ion-icon name="trash-outline" onClick={()=>{productDelete(product.tagName)}}></ion-icon>
           </div>
 
           <div className="price sm-hide">€{product.price}</div>
@@ -101,4 +102,4 @@ const mapStateToProps = state => ({
   basketProps: state.basketState
 })
 
-export default connect(mapStateToProps, { productQuantity })(Cart)
+export default connect(mapStateToProps, { productQuantity, productDelete })(Cart)
