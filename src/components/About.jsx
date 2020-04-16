@@ -17,7 +17,7 @@ class About extends React.Component {
         </div>
 
         <p>
-          This work is a web storefront build using React and Redux. It is my first time using redux and it is definitely a work in progress. The project has been created with the help of online resources and official documentation. I hope you enjoyed this quick demo and thank you for visiting.
+          This work is a web storefront build using React and Redux. It is my first time using redux and it is definitely a work in progress. The project has been created with the help of online resources and official documentation. I hope you enjoyed this demo and thank you for visiting.
         </p>
 
         <p>
