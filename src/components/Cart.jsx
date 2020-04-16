@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
-import { removeProduct } from '../actions/removeAction'
-import { addQuantity } from '../actions/addQuantity'
-import { subtractQuantity } from '../actions/subQuantity'
+import { productQuantity } from '../actions/productQuantity'
+import { productDelete } from '../actions/productDelete'
 
 import tee from '../images/tee.jfif'
 import shirt from '../images/shirt.jfif'
@@ -14,21 +13,9 @@ import jeans from '../images/jeans.jfif'
 
 class Cart extends React.Component {
 
-  handleRemove = (id) => {
-    this.props.removeProduct(id)
-  }
-
-  handleAddQuantity = (id) => {
-    this.props.addQuantity(id)
-  }
-
-  handleSubtractQuantity = (id) => {
-    this.props.subtractQuantity(id)
-  }
-
   render() {
 
-    const { basketProps } = this.props
+    const { basketProps, productQuantity, productDelete } = this.props
 
     let productsInCart = []
 
@@ -40,31 +27,50 @@ class Cart extends React.Component {
       }
     })
 
-    // const productImages = [tee, shirt, sweater, jacket, trousers, jeans]
+    const productImages = (product) => {
+      if (product.tagName === 'tee') {
+        return tee
+      }
+      if (product.tagName === 'shirt') {
+        return shirt
+      }
+      if (product.tagName === 'sweater') {
+        return sweater
+      }
+      if (product.tagName === 'jacket') {
+        return jacket
+      }
+      if (product.tagName === 'trouers') {
+        return trousers
+      }
+      if (product.tagName === 'jeans') {
+        return jeans
+      }
+    }
 
     productsInCart = productsInCart.map((product, index) => {
       return(
-        <>
+        <Fragment key={index}>
           <div className="product">
             <span className="sm-hide">{product.name}</span>
-          {/* <img src={productImages[index]} /> */}
+          <img src={productImages(product)} />
           </div>
 
           <div className="delete">
-            <ion-icon name="trash-outline" onClick={()=>{this.handleRemove(product.id)}}></ion-icon>
+            <ion-icon name="trash-outline" onClick={()=>{productDelete(product.tagName)}}></ion-icon>
           </div>
 
           <div className="price sm-hide">€{product.price}</div>
 
           <div className="quantity">
-            <ion-icon className="decrease" name="remove-circle-outline" onClick={()=>{this.handleSubtractQuantity(product.id)}}></ion-icon>
+            <ion-icon className="decrease" name="remove-circle-outline" onClick={()=>{productQuantity('decrease', product.tagName)}}></ion-icon>
               <span>{product.quantity}</span>
-            <ion-icon className="increase" name="add-circle-outline" onClick={()=>{this.handleAddQuantity(product.id)}}></ion-icon>
+            <ion-icon className="increase" name="add-circle-outline" onClick={()=>{productQuantity('increase', product.tagName)}}></ion-icon>
           </div>
 
           <div className="total">€{product.quantity * product.price}</div>
           
-        </>
+        </Fragment >
       )
     })
 
@@ -84,7 +90,7 @@ class Cart extends React.Component {
 
         <div className="basket-total-container">
           <h4 className="basket-total-title">Basket Total:</h4>
-          <h4 className="basket-total">€{basketProps.cartCost}</h4>
+          <h4 className="basket-total">€{parseFloat(basketProps.cartCost).toFixed(2)}</h4>
         </div>
 
       </div>
@@ -96,10 +102,4 @@ const mapStateToProps = state => ({
   basketProps: state.basketState
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    removeProduct: (id)=>{dispatch(removeProduct(id))},
-    addQuantity: (id)=>{dispatch(addQuantity(id))},
-    subtractQuantity: (id)=>{dispatch(subtractQuantity(id))}
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default connect(mapStateToProps, { productQuantity, productDelete })(Cart)
