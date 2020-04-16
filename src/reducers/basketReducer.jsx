@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_TO_BASKET, GET_NUMBERS_IN_BASKET, REMOVE_PRODUCT, ADD_QUANTITY, SUB_QUANTITY } from "../actions/types"
+import { ADD_PRODUCT_TO_BASKET, GET_NUMBERS_IN_BASKET, INCREASE_QUANTITY, DECREASE_QUANTITY } from "../actions/types"
 
 import tee from '../images/tee.jfif'
 import shirt from '../images/shirt.jfif'
@@ -18,7 +18,8 @@ const initialState = {
       image: tee,
       price: 14.99,
       quantity: 0,
-      inCart: false
+      inCart: false,
+      tagName: 'tee'
     },
     shirt: {
       id: 2,
@@ -27,7 +28,8 @@ const initialState = {
       image: shirt,
       price: 29.99,
       quantity: 0,
-      inCart: false
+      inCart: false,
+      tagName: 'shirt'
     },
     sweater: {
       id: 3,
@@ -36,7 +38,8 @@ const initialState = {
       image: sweater,
       price: 39.99,
       quantity: 0,
-      inCart: false
+      inCart: false,
+      tagName: 'sweater'
     },
     jacket: {
       id: 4,
@@ -45,7 +48,8 @@ const initialState = {
       image: jacket,
       price: 299,
       quantity: 0,
-      inCart: false
+      inCart: false,
+      tagName: 'jacket'
     },
     trousers: {
       id: 5,
@@ -54,7 +58,8 @@ const initialState = {
       image: trousers,
       price: 69.99,
       quantity: 0,
-      inCart: false
+      inCart: false,
+      tagName: 'trousers'
     },
     jeans: {
       id: 6,
@@ -63,7 +68,8 @@ const initialState = {
       image: jeans,
       price: 49.99,
       quantity: 0,
-      inCart: false
+      inCart: false,
+      tagName: 'jeans'
     }
   }
   // products: {
@@ -107,19 +113,49 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
+  let productSelected = '';
   switch(action.type) {
     case ADD_PRODUCT_TO_BASKET:
-      let addQuantity = {...state.products[action.payload]}
-      addQuantity.quantity += 1
-      addQuantity.inCart = true
-      console.log('What is this: ', addQuantity)
+      productSelected = {...state.products[action.payload]}
+      productSelected.quantity += 1;
+      productSelected.inCart = true;
+      console.log('What is this: ', productSelected);
       return {
         ...state,
         basketNumbers: state.basketNumbers + 1,
         cartCost: state.cartCost + state.products[action.payload].price,
         products: {
           ...state.products,
-          [action.payload]: addQuantity  
+          [action.payload]: productSelected  
+        }
+      }
+    case INCREASE_QUANTITY: 
+      productSelected = { ...state.products[action.payload]}
+      productSelected.quantity += 1;
+      return {
+        ...state,
+        cartCost: state.cartCost + state.products[action.payload].price,
+        products: {
+          ...state.products,
+          [action.payload]: productSelected
+        }
+      }
+    case DECREASE_QUANTITY:
+      productSelected = { ...state.products[action.payload]}
+      let newCartCost = 0;
+      if (productSelected.quantity === 0) {
+        productSelected.quantity = 0;
+        newCartCost = state.cartCost;
+      } else {
+        productSelected.quantity -= 1
+        newCartCost = state.cartCost - state.products[action.payload].price;
+      }
+      return {
+        ...state,
+        cartCost: newCartCost,
+        products: {
+          ...state.products,
+          [action.payload]: productSelected
         }
       }
     case GET_NUMBERS_IN_BASKET:
@@ -127,6 +163,6 @@ export default (state = initialState, action) => {
         ...state
       }
     default: 
-      return state
+      return state;
   }
 }
